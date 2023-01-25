@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "116426777290",
+    "project_id": "gustavo-2-0",
+    "storage_bucket": "gustavo-2-0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116426777290:android:fff8f8d88e32e2907f4a33",
+        "android_client_info": {
+          "package_name": "com.example.gustavo_2_0"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116426777290-fttibot9o15vskn9i8japah98elqaekk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy-Q471ZsqhsuYWfSjhon7R6liqLuawgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116426777290-fttibot9o15vskn9i8japah98elqaekk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
