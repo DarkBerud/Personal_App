@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gustavo_2_0/Models/listCard.dart';
+import 'package:gustavo_2_0/screens/listManagementScreen.dart';
 import 'package:gustavo_2_0/theme/colors_theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: ThemeColors.primaryColor,
               child: ListTile(
                 leading: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.exit_to_app,
                     textDirection: TextDirection.ltr,
                   ),
@@ -41,7 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ListManagementScreen(),
+                          ),
+                        );
+                      },
                       child: Text(
                         "Gerenciar Listas",
                         style: TextStyle(fontSize: 16),
@@ -142,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Text(
-                      "100.000,00",
+                      "R\$ 100.000,00",
                       style: TextStyle(fontSize: 20),
                     ),
                   )
@@ -150,96 +159,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Container(
-              alignment: AlignmentDirectional.centerStart,
-              height: 40,
-              color: ThemeColors.containerColor,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Depósito Material de Construção",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Container(
-              alignment: AlignmentDirectional.centerStart,
-              height: 40,
-              color: ThemeColors.containerColor,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Contrução Casa Mombaça",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Container(
-              alignment: AlignmentDirectional.centerStart,
-              height: 40,
-              color: ThemeColors.containerColor,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Despesas",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Container(
-              alignment: AlignmentDirectional.centerStart,
-              height: 40,
-              color: ThemeColors.containerColor,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Entradas",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Container(
-              alignment: AlignmentDirectional.centerStart,
-              height: 40,
-              color: ThemeColors.containerColor,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Investimentos",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Container(
-              alignment: AlignmentDirectional.centerStart,
-              height: 40,
-              color: ThemeColors.containerColor,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Agenda",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ),
-          ),
+          ListCard(title: "Depósito Material de Construção"),
+          ListCard(title: "Contrução Casa Mombaça"),
+          ListCard(title: "Despesas"),
+          ListCard(title: "Entradas"),
+          ListCard(title: "Investimentos"),
+          ListCard(title: "Agenda"),
         ],
       ),
     );
