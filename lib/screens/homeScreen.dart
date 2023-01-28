@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gustavo_2_0/Models/listCard.dart';
+import 'package:gustavo_2_0/models/listCard.dart';
 import 'package:gustavo_2_0/screens/listManagementScreen.dart';
 import 'package:gustavo_2_0/theme/colors_theme.dart';
 
@@ -16,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Menu Principal"),
-        backgroundColor: ThemeColors.primaryColor,
       ),
       drawer: Drawer(
         child: ListView(
@@ -159,12 +158,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          ListCard(title: "Depósito Material de Construção"),
-          ListCard(title: "Contrução Casa Mombaça"),
-          ListCard(title: "Despesas"),
-          ListCard(title: "Entradas"),
-          ListCard(title: "Investimentos"),
-          ListCard(title: "Agenda"),
+          ListCard(title: "Depósito Material de Construção"), //tipo material
+          ListCard(title: "Contrução Casa Mombaça"), //tipo material
+          ListCard(title: "Despesas"), // tipo financeiro
+          ListCard(title: "Entradas"), // tipo financeiro
+          ListCard(title: "Investimentos"), // tipo investimento
+          ListCard(title: "Agenda"), //Tipo agenda
         ],
       ),
     );

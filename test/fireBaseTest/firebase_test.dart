@@ -74,8 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-
-
   Future creatUser(User user) async {
     final docUser = FirebaseFirestore.instance.collection("users").doc();
     // final docUser = FirebaseFirestore.instance.collection("test").doc();
