@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gustavo_2_0/models/listCard.dart';
+import 'package:gustavo_2_0/screens/listItemScreen.dart';
 import 'package:gustavo_2_0/screens/listManagementScreen.dart';
 import 'package:gustavo_2_0/theme/colors_theme.dart';
+
+import '../classes/titlesClass.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -79,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 SizedBox(
                   height: 90,
-                  width: 150,
+                  width: 140,
                   child: Container(
                     color: ThemeColors.containerColor,
                     child: Column(
@@ -105,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(
                   height: 90,
-                  width: 150,
+                  width: 140,
                   child: Container(
                     color: ThemeColors.containerColor,
                     child: Column(
@@ -158,14 +162,60 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          ListCard(title: "Depósito Material de Construção"), //tipo material
-          ListCard(title: "Contrução Casa Mombaça"), //tipo material
-          ListCard(title: "Despesas"), // tipo financeiro
-          ListCard(title: "Entradas"), // tipo financeiro
-          ListCard(title: "Investimentos"), // tipo investimento
-          ListCard(title: "Agenda"), //Tipo agenda
+          StreamBuilder<List<TitlesClass>>(
+            stream: readTitles(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text("Deu ruim!!");
+              } else if (snapshot.hasData) {
+                final titles = snapshot.data!;
+                return ListView(
+                  shrinkWrap: true,
+                  children: titles.map(buildTitle).toList(),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          ),
+          // ListCard(title: "Depósito Material de Construção"), //tipo material
+          // ListCard(title: "Contrução Casa Mombaça"), //tipo material
+          // ListCard(title: "Despesas"), // tipo financeiro
+          // ListCard(title: "Entradas"), // tipo financeiro
+          // ListCard(title: "Investimentos"), // tipo investimento
+          // ListCard(title: "Agenda"), //Tipo agenda
         ],
       ),
     );
   }
+
+  Widget buildTitle(TitlesClass titles) => InkWell(
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ListItemScreen(id: "${titles.id}", title: "${titles.title}", type: "${titles.type}",)));
+    },
+    child: Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Container(
+        alignment: AlignmentDirectional.centerStart,
+        height: 40,
+        color: ThemeColors.containerColor,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text(
+            "${titles.title}",
+            style: const TextStyle(fontSize: 16),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    ),
+  );
+
+  Stream<List<TitlesClass>> readTitles() => FirebaseFirestore.instance
+      .collection("lists")
+      .snapshots()
+      .map((snapshot) =>
+      snapshot.docs.map((doc) => TitlesClass.fromJson(doc.data())).toList());
 }
