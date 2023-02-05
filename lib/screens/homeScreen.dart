@@ -85,7 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 90,
                   width: 140,
                   child: Container(
-                    color: ThemeColors.containerColor,
+                    decoration: BoxDecoration(
+                      color: ThemeColors.containerColor,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -111,7 +114,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 90,
                   width: 140,
                   child: Container(
-                    color: ThemeColors.containerColor,
+                    decoration: BoxDecoration(
+                      color: ThemeColors.containerColor,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -139,8 +145,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 40),
             child: Container(
+              decoration: BoxDecoration(
+                color: ThemeColors.containerColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
               height: 70,
-              color: ThemeColors.containerColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -191,16 +200,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildTitle(TitlesClass titles) => InkWell(
-    onTap: () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => ListItemScreen(id: "${titles.id}", title: "${titles.title}", type: "${titles.type}",)));
-    },
-    child: Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+  Widget buildTitle(TitlesClass titles) => Padding(
+    padding: const EdgeInsets.only(bottom: 16.0),
+    child: InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ListItemScreen(id: "${titles.id}", title: "${titles.title}", type: "${titles.type}", image: "",)));
+      },
       child: Container(
+        decoration: BoxDecoration(
+          color: ThemeColors.containerColor,
+          borderRadius: BorderRadius.circular(6),
+        ),
         alignment: AlignmentDirectional.centerStart,
         height: 40,
-        color: ThemeColors.containerColor,
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(

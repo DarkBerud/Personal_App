@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gustavo_2_0/models/listCard.dart';
 import 'package:gustavo_2_0/screens/listAddScreen.dart';
 import 'package:gustavo_2_0/screens/listUpdateScreen.dart';
 import '../classes/titlesClass.dart';
@@ -57,61 +56,76 @@ class _ListManagementScreenState extends State<ListManagementScreen> {
   //   subtitle: Text("${titles.title}"),
   // );
 
-  Widget buildTitle(TitlesClass titles) => InkWell(
-        onLongPress: () {
-          showDialog(context: context, builder: (context){
-            return AlertDialog(
-              title: Text("${titles.id}"),
-              content: Text("Tem certeza que quer deletar a lista?"),
-              actions: [
-                TextButton(onPressed: (){
-                  Navigator.pop(context);
-                }, child: Text("Não")),
-                TextButton(onPressed: (){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Lista deletada"),
-                      duration: Duration(seconds: 3),
-                    ),
+  Widget buildTitle(TitlesClass titles) => Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: InkWell(
+          onLongPress: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("${titles.id}"),
+                    content: Text("Tem certeza que quer deletar a lista?"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text("Não")),
+                      TextButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Lista deletada"),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
+                            final docList = FirebaseFirestore.instance
+                                .collection("lists")
+                                .doc("${titles.id}");
+                            docList.delete();
+                            Navigator.pop(context);
+                          },
+                          child: Text("Sim")),
+                    ],
                   );
-                  final docList = FirebaseFirestore.instance.collection("lists").doc("${titles.id}");
-                  docList.delete();
-                  Navigator.pop(context);
-                }, child: Text("Sim")),
-              ],
-            );
-          });
-
-        },
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ListUpdateScreen(id: "${titles.id}", title: "${titles.title}", type: "${titles.type}",)));
-        },
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: Container(
-            alignment: AlignmentDirectional.centerStart,
-            height: 40,
-            color: ThemeColors.containerColor,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Text(
-                "${titles.title}",
-                style: const TextStyle(fontSize: 16),
-                overflow: TextOverflow.ellipsis,
+                });
+          },
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ListUpdateScreen(
+                          id: "${titles.id}",
+                          title: "${titles.title}",
+                          type: "${titles.type}",
+                        )));
+          },
+          child: Stack(children: [
+            Container(
+              decoration: BoxDecoration(
+                color: ThemeColors.containerColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              alignment: AlignmentDirectional.centerStart,
+              height: 40,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "${titles.title}",
+                  style: const TextStyle(fontSize: 16),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
-          ),
+          ]),
         ),
       );
 
   Stream<List<TitlesClass>> readTitles() => FirebaseFirestore.instance
       .collection("lists")
       .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => TitlesClass.fromJson(doc.data())).toList());
+      .map((snapshot) => snapshot.docs
+          .map((doc) => TitlesClass.fromJson(doc.data()))
+          .toList());
 }
-
-

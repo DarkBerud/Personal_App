@@ -1,15 +1,38 @@
 import 'package:flutter/material.dart';
+import '../theme/colors_theme.dart';
 
-class MaterialCard extends StatefulWidget {
-  const MaterialCard({Key? key}) : super(key: key);
+class MaterialCard extends StatelessWidget {
+  final String title;
+  final double cost;
+  final int quantify;
 
-  @override
-  State<MaterialCard> createState() => _MaterialCardState();
-}
+  const MaterialCard({Key? key, required this.title, required this.cost, required this.quantify}) : super(key: key);
 
-class _MaterialCardState extends State<MaterialCard> {
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: InkWell(
+          onTap: (){},
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Container(
+              alignment: AlignmentDirectional.centerStart,
+              height: 40,
+              color: ThemeColors.containerColor,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  title,
+                  style: const TextStyle(fontSize: 16),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

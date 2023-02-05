@@ -4,12 +4,29 @@ import 'package:gustavo_2_0/theme/colors_theme.dart';
 
 import '../classes/titlesClass.dart';
 
-class ListAddScreen extends StatelessWidget {
-  final TextEditingController _nameController = TextEditingController();
-  final typechossen = ValueNotifier("");
-  final type = ["Agenda", "Contas", "Financeiro", "Investimento","Material",];
+class ListAddScreen extends StatefulWidget {
 
   ListAddScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ListAddScreen> createState() => _ListAddScreenState();
+}
+
+class _ListAddScreenState extends State<ListAddScreen> {
+  final TextEditingController _nameController = TextEditingController();
+
+  final typechossen = ValueNotifier("");
+
+  final type = ["Agenda", "Contas", "Financeiro", "Investimento","Material",];
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
 
   void showSnackBar(BuildContext context) {
     final snackBar = SnackBar(
@@ -22,6 +39,7 @@ class ListAddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _formKey,
       appBar: AppBar(
         title: const Text("Adicionar uma nova lista"),
       ),
@@ -30,6 +48,12 @@ class ListAddScreen extends StatelessWidget {
         child: ListView(
           children: [
             TextFormField(
+              validator: (String? value) {
+                if (valueValidator(value)) {
+                  return "Insira um nome!";
+                }
+                return null;
+              },
               decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: ThemeColors.primaryColor)),
@@ -78,19 +102,22 @@ class ListAddScreen extends StatelessWidget {
         padding: const EdgeInsets.all(32.0),
         child: ElevatedButton(
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Nova lista adicionada"),
-                  duration: Duration(seconds: 3),
-                ),
-              );
-              final list = TitlesClass(
-                title: _nameController.text,
-                type: typechossen.value.toString(),
-              );
-              creatList(list);
-              Navigator.pop(context);
-            },
+              if (_formKey.currentState!.validate()){
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Nova lista adicionada"),
+                    duration: Duration(seconds: 3),
+                  ),
+                );
+                final list = TitlesClass(
+                  title: _nameController.text,
+                  type: typechossen.value.toString(),
+                );
+                creatList(list);
+                Navigator.pop(context);
+              }
+              },
+
             child: const Text("Criar")),
       ),
     );
