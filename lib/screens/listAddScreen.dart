@@ -19,27 +19,10 @@ class _ListAddScreenState extends State<ListAddScreen> {
 
   final type = ["Agenda", "Contas", "Financeiro", "Investimento","Material",];
 
-  final _formKey = GlobalKey<FormState>();
-
-  bool valueValidator(String? value) {
-    if (value != null && value.isEmpty) {
-      return true;
-    }
-    return false;
-  }
-
-  void showSnackBar(BuildContext context) {
-    final snackBar = SnackBar(
-      content: Text("Nova lista adicionada"),
-      duration: Duration(seconds: 3),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _formKey,
       appBar: AppBar(
         title: const Text("Adicionar uma nova lista"),
       ),
@@ -48,12 +31,6 @@ class _ListAddScreenState extends State<ListAddScreen> {
         child: ListView(
           children: [
             TextFormField(
-              validator: (String? value) {
-                if (valueValidator(value)) {
-                  return "Insira um nome!";
-                }
-                return null;
-              },
               decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: ThemeColors.primaryColor)),
@@ -102,7 +79,6 @@ class _ListAddScreenState extends State<ListAddScreen> {
         padding: const EdgeInsets.all(32.0),
         child: ElevatedButton(
             onPressed: () {
-              if (_formKey.currentState!.validate()){
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("Nova lista adicionada"),
@@ -115,7 +91,6 @@ class _ListAddScreenState extends State<ListAddScreen> {
                 );
                 creatList(list);
                 Navigator.pop(context);
-              }
               },
 
             child: const Text("Criar")),

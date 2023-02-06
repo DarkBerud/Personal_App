@@ -204,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
     padding: const EdgeInsets.only(bottom: 16.0),
     child: InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ListItemScreen(id: "${titles.id}", title: "${titles.title}", type: "${titles.type}", image: "",)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ListItemScreen(id: "${titles.id}",)));
       },
       child: Container(
         decoration: BoxDecoration(

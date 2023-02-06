@@ -1,26 +1,32 @@
 class ItemClass {
   String id;
-  final String title;
-  final String type;
-  // final String image
+  final String name;
+  final num cost;
+  final String image;
+  final num quantify;
 
   ItemClass({
     this.id = "",
-    required this.title,
-    required this.type,
-    // required this.image
+    required this.name,
+    required this.cost,
+    required this.image,
+    required this.quantify,
   });
 
   Map<String, dynamic> toJson() => {
     'id': id,
-    'title': title,
-    'type': type
+    'name': name,
+    'cost': cost,
+    'quantify': quantify,
+    'image': image,
   };
 
   static ItemClass fromJson(Map<String, dynamic> json) => ItemClass(
     id: json["id"],
-    title: json["title"],
-    type: json["type"],
+    name: json["name"],
+    cost: json["cost"],
+    image: json["image"],
+    quantify: json["quantify"]
 
   );
 }

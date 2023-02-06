@@ -1,18 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gustavo_2_0/classes/ItemClass.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:gustavo_2_0/screens/itemAddScreeen.dart';
+import 'package:gustavo_2_0/screens/itemUpdateScreen.dart';
 
 import '../theme/colors_theme.dart';
 
 class ListItemScreen extends StatefulWidget {
   final String id;
-  final String title;
-  final String type;
-  final String image;
 
-  ListItemScreen(
-      {Key? key, required this.id, required this.title, required this.type, required this.image})
-      : super(key: key);
+  ListItemScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   State<ListItemScreen> createState() => _ListItemScreenState();
@@ -20,327 +18,179 @@ class ListItemScreen extends StatefulWidget {
 
 class _ListItemScreenState extends State<ListItemScreen> {
   @override
-
-  bool assetOrNetwork() {
-    if (widget.image.contains("http")) {
-      return false;
-    }
-    return true;
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-        ],
+        title: Text("${widget.id}"),
       ),
-      body: ListView(
-        padding: EdgeInsets.all(32),
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: InkWell(
-              onTap: () {},
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: ThemeColors.containerColor,
-                    ),
-                    height: 100,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.white,
-                            ),
-                            width: 65,
-                            height: 90,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: assetOrNetwork()
-                                  ? Image.asset(widget.image, fit: BoxFit.scaleDown,
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                      return Image.asset(
-                                          "assets/images/nophoto.png");
-                                    })
-                                  : Image.network(widget.image, fit: BoxFit.scaleDown,
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                      return Image.asset(
-                                          "assets/images/nophoto.png");
-                                    }),
-                            ),
-                          ),
-                          const VerticalDivider(),
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "T",
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.none,
-                                      fontSize: 16,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "R\$ 100,00",
-                                        style: const TextStyle(
-                                          decoration: TextDecoration.none,
-                                          fontSize: 16,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Text(
-                                        "999",
-                                        style: const TextStyle(
-                                          decoration: TextDecoration.none,
-                                          fontSize: 16,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: InkWell(
-              onTap: () {},
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: ThemeColors.containerColor,
-                    ),
-                    height: 100,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.white,
-                            ),
-                            width: 65,
-                            height: 90,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: assetOrNetwork()
-                                  ? Image.asset("assets/images/joelho.jpg", fit: BoxFit.scaleDown,
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                      return Image.asset(
-                                          "assets/images/nophoto.png");
-                                    })
-                                  : Image.network(widget.image, fit: BoxFit.scaleDown,
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                      return Image.asset(
-                                          "assets/images/nophoto.png");
-                                    }),
-                            ),
-                          ),
-                          const VerticalDivider(),
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Joelho",
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.none,
-                                      fontSize: 16,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "R\$ 100,00",
-                                        style: const TextStyle(
-                                          decoration: TextDecoration.none,
-                                          fontSize: 16,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Text(
-                                        "999",
-                                        style: const TextStyle(
-                                          decoration: TextDecoration.none,
-                                          fontSize: 16,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+      body: StreamBuilder<List<ItemClass>>(
+        stream: readItems(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print("${snapshot.error}");
+            return Text("Deu ruim!!");
+          } else if (snapshot.hasData) {
+            final titles = snapshot.data!;
+            return ListView(
+              padding: const EdgeInsets.all(32.0),
+              children: titles.map(buildTitle).toList(),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ListItemAddScreen(id: widget.id,)));
+        },
         child: const Icon(Icons.add),
       ),
     );
   }
 
   Widget buildTitle(ItemClass titles) => Padding(
-    padding: const EdgeInsets.only(bottom: 16.0),
-    child: InkWell(
-      onTap: () {},
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: ThemeColors.containerColor,
-            ),
-            height: 100,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.black26,
-                    ),
-                    width: 65,
-                    height: 90,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: assetOrNetwork()
-                          ? Image.asset(widget.image, fit: BoxFit.cover,
-                          errorBuilder: (BuildContext context,
-                              Object exception,
-                              StackTrace? stackTrace) {
-                            return Image.asset(
-                                "assets/images/nophoto.png");
-                          })
-                          : Image.network(widget.image, fit: BoxFit.cover,
-                          errorBuilder: (BuildContext context,
-                              Object exception,
-                              StackTrace? stackTrace) {
-                            return Image.asset(
-                                "assets/images/nophoto.png");
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: InkWell(
+          onLongPress: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("${titles.id}"),
+                    content: Text("Tem certeza que quer deletar a lista?"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text("Não")),
+                      TextButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Item deletado"),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
+                            final docList = FirebaseFirestore.instance
+                                .collection("lists")
+                                .doc("${widget.id}")
+                                .collection("Item")
+                                .doc("${titles.id}");
+                            docList.delete();
+                            Navigator.pop(context);
+                          },
+                          child: Text("Sim")),
+                    ],
+                  );
+                });
+          },
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ItemUpdateScreen()));
+          },
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: ThemeColors.containerColor,
+                ),
+                height: 100,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white,
+                        ),
+                        width: 65,
+                        height: 90,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child:
+                              // child: assetOrNetwork()
+                              //     ? Image.asset("assets/images/T.jpg", fit: BoxFit.scaleDown,
+                              //         errorBuilder: (BuildContext context,
+                              //             Object exception,
+                              //             StackTrace? stackTrace) {
+                              //         return Image.asset(
+                              //             "assets/images/nophoto.png");
+                              //       }) :
+                              Image.network("${titles.image}",
+                                  fit: BoxFit.scaleDown, errorBuilder:
+                                      (BuildContext context, Object exception,
+                                          StackTrace? stackTrace) {
+                            return Image.asset("assets/images/nophoto.png");
                           }),
-                    ),
-                  ),
-                  VerticalDivider(),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          child: Text(
-                            widget.title,
-                            style: const TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 16,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                        ),
+                      ),
+                      const VerticalDivider(),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8.0, bottom: 8.0, right: 8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${titles.name}",
+                                style: const TextStyle(
+                                  decoration: TextDecoration.none,
+                                  fontSize: 16,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${titles.cost}",
+                                    style: const TextStyle(
+                                      decoration: TextDecoration.none,
+                                      fontSize: 16,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${titles.quantify}",
+                                    style: const TextStyle(
+                                      decoration: TextDecoration.none,
+                                      fontSize: 16,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 190,
-                              child: Text(
-                                "R\$ 100,00",
-                                style: const TextStyle(
-                                  decoration: TextDecoration.none,
-                                  fontSize: 16,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              child: Text(
-                                "999",
-                                style: const TextStyle(
-                                  decoration: TextDecoration.none,
-                                  fontSize: 16,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          )
-        ],
-      ),
-    ),
-  );
+            ],
+          ),
+        ),
+      );
 
-  Stream<List<ItemClass>> readTitles() => FirebaseFirestore.instance
+  Stream<List<ItemClass>> readItems() => FirebaseFirestore.instance
       .collection("lists")
+      .doc("${widget.id}")
+      .collection("Item")
       .snapshots()
-      .map((snapshot) => snapshot.docs
-      .map((doc) => ItemClass.fromJson(doc.data()))
-      .toList());
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => ItemClass.fromJson(doc.data())).toList());
 }

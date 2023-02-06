@@ -26,8 +26,8 @@ class VirtualAssistence extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: DefaultTheme,
-        home: HomeScreen(),
-       // home: ListItemScreen(id: "teste", title: "teste", type: "Material", image: "assets/images/T.jpg",),
+         home: HomeScreen(),
+         // home: ListItemScreen(),
     );
   }
 }
