@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gustavo_2_0/models/materialCard.dart';
 import 'package:gustavo_2_0/screens/homeScreen.dart';
+import 'package:gustavo_2_0/screens/itemAddScreeen.dart';
 import 'package:gustavo_2_0/screens/listAddScreen.dart';
 import 'package:gustavo_2_0/screens/listItemScreen.dart';
 import 'package:gustavo_2_0/screens/listManagementScreen.dart';
@@ -26,6 +27,7 @@ class VirtualAssistence extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: DefaultTheme,
+         // home: ListItemAddScreen(id: ""),
          home: HomeScreen(),
          // home: ListItemScreen(),
     );
