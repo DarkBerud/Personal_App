@@ -93,7 +93,7 @@ class _ListItemScreenState extends State<ListItemScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ItemUpdateScreen()));
+                    builder: (context) => ItemUpdateScreen(id: widget.id, itemId: titles.id, name: titles.name, cost: titles.cost, quantify: titles.quantify, image: titles.image, )));
           },
           child: Stack(
             children: [
@@ -156,7 +156,7 @@ class _ListItemScreenState extends State<ListItemScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "${titles.cost}",
+                                    "R\$ ${titles.cost}",
                                     style: const TextStyle(
                                       decoration: TextDecoration.none,
                                       fontSize: 16,
@@ -164,7 +164,7 @@ class _ListItemScreenState extends State<ListItemScreen> {
                                     ),
                                   ),
                                   Text(
-                                    "${titles.quantify}",
+                                    "Quantidade ${titles.quantify}",
                                     style: const TextStyle(
                                       decoration: TextDecoration.none,
                                       fontSize: 16,

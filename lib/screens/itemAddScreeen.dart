@@ -17,20 +17,20 @@ class ListItemAddScreen extends StatefulWidget {
 class _ListItemAddScreenState extends State<ListItemAddScreen> {
   final TextEditingController _nameController = TextEditingController();
 
-  final TextEditingController _imageController = TextEditingController();
-
   final TextEditingController _costController = TextEditingController();
 
   final TextEditingController _quantifyController = TextEditingController();
 
-  String _selected = "0";
+  String _selected = "https://firebasestorage.googleapis.com/v0/b/gustavo-2-0-2.appspot.com/o/nophoto.png?alt=media&token=3ec8959f-0b6c-489e-93ff-5f2b0d37f4b3";
 
   List<Map> itensList = [
+    //No Photo
     {
       "id": "0",
       "image":
       "https://firebasestorage.googleapis.com/v0/b/gustavo-2-0-2.appspot.com/o/nophoto.png?alt=media&token=3ec8959f-0b6c-489e-93ff-5f2b0d37f4b3"
     },
+    //Canos
     {
       "id": "1",
       "image":
@@ -155,7 +155,7 @@ class _ListItemAddScreenState extends State<ListItemAddScreen> {
                         },
                         items: itensList.map((itenType) {
                           return DropdownMenuItem(
-                            value: itenType["id"].toString(),
+                            value: itenType["image"].toString(),
                             child: Center(
                               child: Image.network(
                                 itenType["image"], width: 60,

@@ -66,16 +66,6 @@ class ListUpdateScreen extends StatelessWidget {
       ),
     );
   }
-  Future creatList(TitlesClass title) async {
-    final docTitle = FirebaseFirestore.instance.collection("lists").doc();
-    // final docTitle = FirebaseFirestore.instance.collection("test").doc();
-    // final docTitle = FirebaseFirestore.instance.collection("test2").doc("test2").collection("test2").doc();
-    title.id = docTitle.id;
-
-    final json = title.toJson();
-    await docTitle.set(json);
-
-  }
 }
 
 
