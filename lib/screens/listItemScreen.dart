@@ -164,7 +164,7 @@ class _ListItemScreenState extends State<ListItemScreen> {
                                     ),
                                   ),
                                   Text(
-                                    "Quantidade ${titles.quantify}",
+                                    "Quantidade: ${titles.quantify}",
                                     style: const TextStyle(
                                       decoration: TextDecoration.none,
                                       fontSize: 16,

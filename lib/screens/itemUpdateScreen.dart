@@ -58,6 +58,29 @@ class ItemUpdateScreen extends StatelessWidget {
       "image":
           "https://firebasestorage.googleapis.com/v0/b/gustavo-2-0-2.appspot.com/o/images%2FCola.jpg?alt=media&token=8a56351b-2512-4e3c-b082-9e880af35ce9"
     },
+    // mao de obra
+    {
+      "id": "9",
+      "image":
+      "https://firebasestorage.googleapis.com/v0/b/gustavo-2-0-2.appspot.com/o/images%2Fpedreiro.png?alt=media&token=7fa62edd-3370-4d0d-a0a0-cc0e0d009c21"
+    },
+    {
+      "id": "10",
+      "image":
+      "https://firebasestorage.googleapis.com/v0/b/gustavo-2-0-2.appspot.com/o/images%2Fajudante%20de%20pedreiro.png?alt=media&token=0d3a3292-cc0e-49a7-b2ce-c457d77e7cbb"
+    },
+    // madeiramento
+    {
+      "id": "11",
+      "image":
+      "https://firebasestorage.googleapis.com/v0/b/gustavo-2-0-2.appspot.com/o/images%2FMadeira%202.png?alt=media&token=9e69a10f-e28a-4b8f-8f4a-add71bf661c5"
+    },
+    // documentacao
+    {
+      "id": "12",
+      "image":
+      "https://firebasestorage.googleapis.com/v0/b/gustavo-2-0-2.appspot.com/o/images%2FPlanta.png?alt=media&token=6d0b1b68-9285-4669-8816-074ceeb677e0"
+    },
   ];
 
   final String id;
@@ -222,7 +245,6 @@ class ItemUpdateScreen extends StatelessWidget {
         .collection("Item")
         .doc("${itemId}");
     docTitle.update({
-      'id' : nameController.text,
       'name': nameController.text,
       'cost': num.tryParse(costController.text),
       'quantify': num.tryParse(quantifyController.text),
@@ -231,6 +253,7 @@ class ItemUpdateScreen extends StatelessWidget {
     // final docTitle = FirebaseFirestore.instance.collection("test").doc();
     // final docTitle = FirebaseFirestore.instance.collection("test2").doc("test2").collection("test2").doc();
     title.id = docTitle.id;
+
 
     final json = title.toJson();
     await docTitle.set(json);
